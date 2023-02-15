@@ -33,6 +33,9 @@
       "@utils": [
         "src/utils"
       ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
       "@worker/*": [
         "src/worker/*"
       ],
