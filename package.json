@@ -1,0 +1,40 @@
+{
+  "name": "flowbuild-node-worker",
+  "version": "1.0.0",
+  "description": "Flowbuild Node Worker",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && tsc-alias -p tsconfig.json",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(ts)\"",
+    "test": "echo \"Warning: no test specified\" && exit 0",
+    "start": "node -r tsconfig-paths/register ./dist/src/index",
+    "start:dev": "ts-node -r tsconfig-paths/register ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.4.0",
+    "@types/node": "^18.13.0",
+    "@types/uuid": "^9.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "jest": "^29.4.3",
+    "prettier": "^2.8.4",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.2",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@flowbuild/engine": "2.19.0-beta.8",
+    "kafkajs": "^2.2.3",
+    "redis": "^4.6.4",
+    "uuid": "^9.0.0",
+    "winston": "^3.8.2"
+  }
+}

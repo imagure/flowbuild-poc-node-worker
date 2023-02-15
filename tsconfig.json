@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "rootDir": "./",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+      "@configs/*": [
+        "src/configs/*"
+      ],
+      "@common-types/*": [
+        "src/types/*"
+      ],
+      "@common-types": [
+        "src/types"
+      ],
+      "@kafka/*": [
+        "src/kafka/*"
+      ],
+      "@kafka": [
+        "src/kafka"
+      ],
+      "@redis/*": [
+        "src/redis/*"
+      ],
+      "@redis": [
+        "src/redis"
+      ],
+      "@utils": [
+        "src/utils"
+      ],
+      "@worker/*": [
+        "src/worker/*"
+      ],
+      "@worker": [
+        "src/worker"
+      ]
+    },
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "types": [
+      "@types/node",
+      "jest"
+    ]
+  }
+}
