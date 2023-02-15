@@ -9,6 +9,18 @@ import { CustomTimerSystemTaskNode, CustomEventNode } from '@worker/nodes'
 class NodeExecutionManager {
   static _instance: NodeExecutionManager
   static _producer: Producer
+  static _nodes: { [key: string]: typeof Nodes } = {
+    'start-nodes-topic': Nodes.StartNode,
+    'http-nodes-topic': Nodes.HttpSystemTaskNode,
+    'finish-nodes-topic': Nodes.FinishNode,
+    'form-request-nodes-topic': Nodes.FormRequestNode,
+    'flow-nodes-topic': Nodes.FlowNode,
+    'js-script-task-nodes-topic': Nodes.ScriptTaskNode,
+    'timer-nodes-topic': CustomTimerSystemTaskNode,
+    'user-task-nodes-topic': Nodes.UserTaskNode,
+    'event-nodes-topic': CustomEventNode,
+    'system-task-nodes-topic': Nodes.SystemTaskNode,
+  }
 
   static get instance(): NodeExecutionManager {
     return NodeExecutionManager._instance
@@ -42,18 +54,11 @@ class NodeExecutionManager {
   }
 
   static get nodes(): { [key: string]: typeof Nodes } {
-    return {
-      'start-nodes-topic': Nodes.StartNode,
-      'http-nodes-topic': Nodes.HttpSystemTaskNode,
-      'finish-nodes-topic': Nodes.FinishNode,
-      'form-request-nodes-topic': Nodes.FormRequestNode,
-      'flow-nodes-topic': Nodes.FlowNode,
-      'js-script-task-nodes-topic': Nodes.ScriptTaskNode,
-      'timer-nodes-topic': CustomTimerSystemTaskNode,
-      'user-task-nodes-topic': Nodes.UserTaskNode,
-      'event-nodes-topic': CustomEventNode,
-      'system-task-nodes-topic': Nodes.SystemTaskNode,
-    }
+    return NodeExecutionManager._nodes
+  }
+
+  static set nodes(nodes: { [key: string]: typeof Nodes }) {
+    this._nodes = nodes
   }
 
   constructor() {
@@ -90,7 +95,7 @@ class NodeExecutionManager {
     const messageValue = {
       result: {
         ...result,
-        bag: this.extractResultToBag(result, action.node_spec.extract),
+        bag: this.extractResultToBag(result, action.node_spec?.extract || null),
       },
       workflow_name: action.workflow_name,
       process_id: action.process_id,
