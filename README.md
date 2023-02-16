@@ -36,10 +36,9 @@ pnpm run test:badges
 ## App monitoring:
 To get application behavior, you might use climem (reference: https://www.npmjs.com/package/climem)
 
-It's a quick setup:
+There's a script already set up. Just run:
 ```
-pnpm i climem -D
-export CLIMEM=8997 && ts-node -r climem -r tsconfig-paths/register ./src/index.ts
+pnpm run start:climem
 ```
 
 To see memory usage:
