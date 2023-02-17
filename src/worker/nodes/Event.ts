@@ -6,6 +6,8 @@ import { Actor } from '@/kafka'
 import { LooseObject } from '@/types'
 import { RedisClient } from '@redis'
 import { Producer } from 'kafkajs'
+import { v4 as uuid } from 'uuid'
+import { Workflow } from '../types'
 
 class CustomEventNode extends Nodes.EventNode {
   private id: any
@@ -99,9 +101,13 @@ class CustomEventNode extends Nodes.EventNode {
             `process_targets:${event.definition}:${target_process_id}`
           )) as LooseObject
         }
+
         if (target) {
+          const workflow = (await redis.get(
+            `workflows:${target.workflow_name}`
+          )) as Workflow
           const payload = {
-            workflow_name: target.workflow_name,
+            workflow,
             input: { ...execution_data.trigger_payload },
             process_id: target_process_id,
             actor: actor_data,
@@ -117,8 +123,12 @@ class CustomEventNode extends Nodes.EventNode {
           target = (await this._redis.get(
             `workflow_targets:${event.definition}`
           )) as LooseObject
+          const workflow = (await redis.get(
+            `workflows:${target.workflow_name}`
+          )) as Workflow
           const payload = {
-            workflow_name: target.workflow_name,
+            workflow,
+            process_id: uuid(),
             input: {
               ...execution_data.trigger_payload,
               target_process_id: process_id,

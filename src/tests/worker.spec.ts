@@ -76,7 +76,7 @@ it('should correctly call startProcess action', async () => {
     partition: 1,
     message: {
       value:
-        '{"nodeSpec": {},"execution_data": {"any":"value"},"workflow_name":"TEST_WORKFLOW","process_id":"TEST_PROCESS_ID","actor":{"id": "TEST_ACTOR_ID"}}',
+        '{"nodeSpec": {},"execution_data": {"any":"value"},"workflow":{"name":"TEST_WORKFLOW"},"process_id":"TEST_PROCESS_ID","actor":{"id": "TEST_ACTOR_ID"}}',
     },
   } as unknown as EachMessagePayload)
   expect(nodeRunMock).toHaveBeenCalledTimes(1)

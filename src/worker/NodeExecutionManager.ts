@@ -87,7 +87,7 @@ class NodeExecutionManager {
       ...action.execution_data,
       process_id: action.process_id,
       actor_data: action.actor,
-      workflow_name: action.workflow_name,
+      workflow_name: action.workflow.name,
     })) as NodeResult
 
     console.info('\nRESULT: ', result)
@@ -97,7 +97,7 @@ class NodeExecutionManager {
         ...result,
         bag: this.extractResultToBag(result, action.node_spec?.extract || null),
       },
-      workflow_name: action.workflow_name,
+      workflow: action.workflow,
       process_id: action.process_id,
       actor: action.actor,
     }
